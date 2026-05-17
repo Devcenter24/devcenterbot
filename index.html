@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DevCenterBot — Bot Discord multifonction pour modération, niveaux, tickets, giveaways et plus.">
+  <title>DevCenterBot — Bot Discord multifonction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow--1" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow--2" aria-hidden="true"></div>
+
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#" class="logo">
+        <span class="logo-icon">DC</span>
+        <span class="logo-text">DevCenter<span class="logo-accent">Bot</span></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#modules">Modules</a></li>
+        <li><a href="#avantages">Avantages</a></li>
+        <li><a href="#stats">Statistiques</a></li>
+        <li><a href="https://discord.com/oauth2/authorize?client_id=1486398705551806636" class="btn btn--sm link-invite" target="_blank" rel="noopener noreferrer">Inviter</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-inner">
+          <div class="hero-badge">
+            <span class="pulse"></span>
+            Bot Discord multifonction
+          </div>
+          <h1 class="hero-title">
+            Gérez, sécurisez et <span class="gradient-text">animez</span> votre serveur
+          </h1>
+          <p class="hero-desc">
+            DevCenterBot regroupe modération, logs, niveaux, tickets, giveaways et bien plus dans un seul bot performant et facile à utiliser — pour les serveurs classiques comme spécialisés.
+          </p>
+          <div class="hero-actions">
+            <a href="https://discord.com/oauth2/authorize?client_id=1486398705551806636" class="btn btn--primary link-invite" target="_blank" rel="noopener noreferrer">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+              Inviter le bot
+            </a>
+            <a href="#modules" class="btn btn--ghost">Découvrir les modules</a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <span class="hero-stat-num" data-live="guilds">0</span>
+              <span class="hero-stat-label">serveurs</span>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat">
+              <span class="hero-stat-num" data-live="users">0</span>
+              <span class="hero-stat-label">utilisateurs</span>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat">
+              <span class="hero-stat-num" data-total="commands">0</span>
+              <span class="hero-stat-label">commandes</span>
+            </div>
+          </div>
+          <p class="stats-status" id="statsStatus" aria-live="polite"></p>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="terminal">
+            <div class="terminal-bar">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="terminal-body">
+              <p><span class="t-prompt">/</span>help</p>
+              <p class="t-muted">DevCenterBot — Aide</p>
+              <p class="t-cmd"><span class="t-module">Modération</span> · 14 commandes</p>
+              <p class="t-cmd"><span class="t-module">Niveaux</span> · 5 commandes</p>
+              <p class="t-cmd"><span class="t-module">Utilitaires</span> · 13 commandes</p>
+              <p class="t-cmd"><span class="t-module">Giveaways</span> · 4 commandes</p>
+              <p class="t-success">✓ Prêt à servir votre serveur</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="modules">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Modules</span>
+          <h2>Tout ce dont votre serveur a besoin</h2>
+          <p>Des outils essentiels regroupés dans un seul bot, organisés par catégories pour une gestion claire et efficace.</p>
+        </div>
+        <div class="modules-grid">
+          <article class="module-card" data-module="moderation">
+            <div class="module-icon">🛡️</div>
+            <h3>Modération</h3>
+            <p>Sanctions, gestion des membres et maintien de l'ordre sur votre serveur.</p>
+            <div class="module-meta">
+              <span class="module-cmds">14 commandes</span>
+              <span class="module-staff">14 staff/admin</span>
+            </div>
+          </article>
+          <article class="module-card" data-module="logs">
+            <div class="module-icon">📋</div>
+            <h3>Logs</h3>
+            <p>Historique clair et organisé des actions importantes du serveur.</p>
+            <div class="module-meta">
+              <span class="module-cmds">1 commande</span>
+              <span class="module-staff">1 staff/admin</span>
+            </div>
+          </article>
+          <article class="module-card" data-module="levels">
+            <div class="module-icon">⭐</div>
+            <h3>Niveaux</h3>
+            <p>Système d'expérience et de niveaux pour récompenser l'activité des membres.</p>
+            <div class="module-meta">
+              <span class="module-cmds">5 commandes</span>
+              <span class="module-staff">3 staff/admin</span>
+            </div>
+          </article>
+          <article class="module-card" data-module="tickets">
+            <div class="module-icon">🎫</div>
+            <h3>Tickets</h3>
+            <p>Support rapide et structuré pour aider vos membres facilement.</p>
+            <div class="module-meta">
+              <span class="module-cmds">1 commande</span>
+              <span class="module-staff">1 staff/admin</span>
+            </div>
+          </article>
+          <article class="module-card" data-module="service">
+            <div class="module-icon">⚙️</div>
+            <h3>Service</h3>
+            <p>Gestion des services internes de votre serveur avec des outils pratiques.</p>
+            <div class="module-meta">
+              <span class="module-cmds">4 commandes</span>
+              <span class="module-staff">4 staff/admin</span>
+            </div>
+          </article>
+          <article class="module-card" data-module="giveaways">
+            <div class="module-icon">🎁</div>
+            <h3>Giveaways</h3>
+            <p>Concours et giveaways pour animer votre communauté sans effort.</p>
+            <div class="module-meta">
+              <span class="module-cmds">4 commandes</span>
+              <span class="module-staff">4 staff/admin</span>
+            </div>
+          </article>
+          <article class="module-card" data-module="airport">
+            <div class="module-icon">✈️</div>
+            <h3>Aéroport</h3>
+            <p>Module spécialisé pour serveurs roleplay aviation et gestion aéroportuaire.</p>
+            <div class="module-meta">
+              <span class="module-cmds">2 commandes</span>
+              <span class="module-staff">2 staff/admin</span>
+            </div>
+          </article>
+          <article class="module-card" data-module="utils">
+            <div class="module-icon">🔧</div>
+            <h3>Utilitaires</h3>
+            <p>Commandes utiles au quotidien pour améliorer l'expérience utilisateur.</p>
+            <div class="module-meta">
+              <span class="module-cmds">13 commandes</span>
+              <span class="module-staff">9 staff/admin</span>
+            </div>
+          </article>
+          <article class="module-card" data-module="info">
+            <div class="module-icon">ℹ️</div>
+            <h3>Informations</h3>
+            <p>Informations rapides sur le bot ou le serveur, accessibles à tous.</p>
+            <div class="module-meta">
+              <span class="module-cmds">3 commandes</span>
+              <span class="module-staff module-staff--public">Public</span>
+            </div>
+          </article>
+          <article class="module-card module-card--featured" data-module="ai">
+            <div class="module-icon">🤖</div>
+            <h3>IA</h3>
+            <p>Intelligence artificielle intégrée pour assister vos membres au quotidien.</p>
+            <div class="module-meta">
+              <span class="module-cmds">1 commande</span>
+              <span class="module-staff module-staff--public">Public</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="avantages">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Pourquoi nous ?</span>
+          <h2>Pourquoi choisir DevCenterBot ?</h2>
+          <p>La solution idéale pour gérer, sécuriser et dynamiser votre serveur Discord avec un seul bot.</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="feature-num">01</div>
+            <h3>Multifonction et complet</h3>
+            <p>Modération, animation, support et automatisation réunis dans une seule interface.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-num">02</div>
+            <h3>Facile à configurer</h3>
+            <p>Prise en main rapide, sans configuration complexe ni courbe d'apprentissage.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-num">03</div>
+            <h3>Adapté à tous les serveurs</h3>
+            <p>Serveurs classiques, communautés gaming ou roleplay aviation — DevCenterBot s'adapte.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-num">04</div>
+            <h3>Modération avancée</h3>
+            <p>14 commandes dédiées pour maintenir l'ordre et protéger votre communauté.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-num">05</div>
+            <h3>Animation intégrée</h3>
+            <p>Niveaux, giveaways et IA pour garder vos membres actifs et engagés.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-num">06</div>
+            <h3>Support structuré</h3>
+            <p>Système de tickets pour répondre efficacement aux demandes de vos membres.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="stats">
+      <div class="container">
+        <div class="stats-banner">
+          <div class="stats-content">
+            <h2>Un bot, toutes les fonctionnalités</h2>
+            <p>Simplifiez la gestion de votre serveur tout en ajoutant des outils modernes et performants.</p>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-box stat-box--highlight">
+              <span class="stat-value" data-live="guilds">0</span>
+              <span class="stat-label">Serveurs protégés</span>
+            </div>
+            <div class="stat-box stat-box--highlight">
+              <span class="stat-value" data-live="users">0</span>
+              <span class="stat-label">Utilisateurs protégés</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-value" data-total="commands">0</span>
+              <span class="stat-label">Commandes totales</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-value" data-total="modules">0</span>
+              <span class="stat-label">Modules actifs</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-value" data-total="staffCommands">0</span>
+              <span class="stat-label">Commandes staff</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-value" data-total="publicCommands">0</span>
+              <span class="stat-label">Commandes publiques</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta" id="invite">
+      <div class="container">
+        <div class="cta-card">
+          <h2>Prêt à transformer votre serveur ?</h2>
+          <p>Ajoutez DevCenterBot à votre serveur Discord en un clic et profitez de tous les modules dès maintenant.</p>
+          <div class="cta-actions">
+            <a href="https://discord.com/oauth2/authorize?client_id=1486398705551806636" class="btn btn--primary btn--lg link-invite" id="inviteBtn" target="_blank" rel="noopener noreferrer">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+              Inviter DevCenterBot
+            </a>
+            <a href="https://discord.gg/FEJn9MfZUk" class="btn btn--ghost btn--lg link-support" id="supportBtn" target="_blank" rel="noopener noreferrer">Serveur support</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="#" class="logo logo--footer">
+        <span class="logo-icon">DC</span>
+        <span class="logo-text">DevCenter<span class="logo-accent">Bot</span></span>
+      </a>
+      <p class="footer-copy">© 2026 DevCenterBot. Tous droits réservés.</p>
+      <div class="footer-links">
+        <a href="#modules">Modules</a>
+        <a href="#avantages">Avantages</a>
+        <a href="https://discord.com/oauth2/authorize?client_id=1486398705551806636" class="link-invite" target="_blank" rel="noopener noreferrer">Inviter</a>
+        <a href="https://discord.gg/FEJn9MfZUk" class="link-support" target="_blank" rel="noopener noreferrer">Support</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

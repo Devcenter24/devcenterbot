@@ -1,0 +1,95 @@
+=== DevCenterBot — Pterodactyl (bot PYTHON + site Node) ===
+
+Ton bot = discord.py sur un serveur Ptero "Python".
+Le site = Node.js sur un AUTRE serveur Ptero (ou le même, voir option B).
+
+Sur Ptero, 127.0.0.1 dans le bot ne voit PAS un autre serveur.
+→ Il faut STATS_API_URL=http://IP:PORT du serveur Node.
+
+══════════════════════════════════════════════
+A) DEUX SERVEURS (recommandé)
+══════════════════════════════════════════════
+
+── 1) Serveur SITE (Node.js) ──
+
+• Create Server → Egg : Node.js
+• Upload le dossier "bot Devcenter"
+• Startup :
+    node server.js
+• Démarre → Network / Allocations → note IP + PORT
+  Exemple : 51.12.34.56:3000
+
+Test console Node :
+    curl http://127.0.0.1:${SERVER_PORT}/api/stats
+
+── 2) Serveur BOT (Python / discord.py) ──
+
+• Egg : Python (ou ton egg bot habituel)
+• Dépendances : pip install aiohttp discord.py
+
+• Panel → Startup → Variables (ou .env) :
+
+    STATS_API_URL=http://51.12.34.56:3000
+
+  (remplace par TON IP:PORT du serveur Node)
+
+• Dans ton main.py (discord.py), ajoute :
+
+    import os
+    import aiohttp
+
+    STATS_API_URL = os.getenv("STATS_API_URL", "http://127.0.0.1:3000").rstrip("/")
+
+    async def envoyer_stats_site(bot):
+        serveurs = len(bot.guilds)
+        utilisateurs = sum((g.member_count or 0) for g in bot.guilds)
+        url = f"{STATS_API_URL}/api/stats/sync"
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.post(
+                    url,
+                    json={"guilds": serveurs, "users": utilisateurs},
+                    timeout=aiohttp.ClientTimeout(total=15),
+                ) as resp:
+                    if resp.status >= 400:
+                        print(f"[Site] Erreur {resp.status}: {await resp.text()}")
+                    else:
+                        print(f"[Site] OK — {serveurs} serveurs, {utilisateurs} users")
+        except aiohttp.ClientConnectorError:
+            print(f"[Site] Injouignable : {url}")
+            print("  Vérifie que le serveur Node Ptero est démarré + STATS_API_URL")
+
+    @bot.event
+    async def on_ready():
+        print(f"Connecté : {bot.user}")
+        await envoyer_stats_site(bot)
+
+• Redémarre le bot Python.
+
+══════════════════════════════════════════════
+B) UN SEUL SERVEUR (bot Py + site dans le même conteneur)
+══════════════════════════════════════════════
+
+• Upload le site dans : /home/container/site/
+• Startup (egg Python) :
+
+    node /home/container/site/server.js &
+    python /home/container/main.py
+
+• Pas besoin de STATS_API_URL si tu gardes :
+
+    STATS_API_URL=http://127.0.0.1:3000
+
+(Node et Python dans le même conteneur = même 127.0.0.1)
+
+══════════════════════════════════════════════
+C) Module prêt à l'emploi (Python)
+══════════════════════════════════════════════
+
+Copie bot_sync.py dans le dossier de ton bot :
+
+    from bot_sync import start_auto_sync
+    start_auto_sync(bot)   # après avoir créé bot = commands.Bot(...)
+
+Sur Ptero, variable obligatoire (2 serveurs) :
+    STATS_API_URL=http://IP:PORT
